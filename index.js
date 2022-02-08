@@ -68,11 +68,11 @@ app.get('/movie', (req, res) => {
   var name = req.query.name
   var link = req.query.link
   var urlname = name.replace(" ","%20")
-if (pass === "perrypost") {
+if (pass === process.env.passwd) {
   movieart(name, (error, response) => {
     db.get("movie").push({ 
     "name": name,
-    "link":`https://clouddb.perrypal21.repl.co/watch?link=${link}&name=${urlname}`,
+    "link":`https://${process.env.baseurl}/watch?link=${link}&name=${urlname}`,
     "img":response
   })
   db.save()
